@@ -1,0 +1,52 @@
+pre[class*='language-'] {
+  padding: theme('spacing.5');
+  border-radius: theme('borderRadius.xl');
+  color: theme('colors.code.white');
+  background-color: theme('colors.code.darkGray');
+} 
+
+
+.token.class-name,
+.token.selector,
+.token.selector .class,
+.token.selector.class,
+.token.function {
+  color: theme('colors.code.peach');
+}
+
+.token.pseudo-class,
+.token.important,
+.token.attr-equals,
+
+.token.keyword.module,
+.token.unit {
+  color: theme('colors.code.purple');
+}
+
+
+.token.keyword,
+.token.rule {
+  color: theme('colors.code.darkBlue');
+}
+.token.tag,
+.token.attr-name,
+.token.maybe-class-name,
+.token.generic {
+  color: theme('colors.code.lightBlue');
+}
+
+.token.attr-value,
+.token.class,
+.token.string,
+.token.property {
+  color: theme('colors.code.yellow');
+}
+
+
+.token.comment,
+.token.operator,
+.token.combinator,
+.token.punctuation {
+  color: theme('colors.code.lightGray');
+}
+
