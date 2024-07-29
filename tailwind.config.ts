@@ -3,11 +3,7 @@ import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 
 export default {
-  content: [
-    "./app/**/*.{ts,tsx,mdx}",
-    "./forms/**/*.{ts,tsx,mdx}",
-    "./components/**/*.{ts,tsx,mdx}",
-  ],
+  content: ["./app/**/*.{ts,tsx,mdx}", "./components/**/*.{ts,tsx,mdx}"],
   darkMode: "selector",
   theme: {
     extend: {
