@@ -1,5 +1,5 @@
 import { Container } from "@/components/container";
-import { SubscribeForm } from "@/forms/subscribe";
+import { SubscribeForm } from "@/components/subscribe";
 
 export default function Page() {
   return (
