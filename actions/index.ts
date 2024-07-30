@@ -1,13 +1,13 @@
 "use server";
 
-export async function subscribe(
-  // biome-ignore lint/suspicious/noExplicitAny:
-  prevState: any,
-  data: FormData,
-) {
-  const email = data.get("email");
+import { bento } from "@/lib/analytics";
+import { z } from "zod";
+import { createServerAction } from "zsa";
 
-  console.log(email);
+export const subscribeAction = createServerAction()
+  .input(z.object({ email: z.string().email() }))
+  .handler(async ({ input }) => {
+    await bento.V1.addSubscriber({ email: input.email });
 
-  return { email };
-}
+    return input;
+  });

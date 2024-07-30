@@ -1,26 +1,56 @@
 "use client";
 
-import { subscribe } from "@/actions";
+import { subscribeAction } from "@/actions";
 import { Button } from "@/components/button";
-import { LoadingIcon } from "@/components/icons";
-import { useActionState } from "react";
+import { EmailLoveIcon, LoadingIcon } from "@/components/icons";
+import { storage } from "@/lib/storage";
+import type { FormEvent } from "react";
+import { useServerAction } from "zsa-react";
+import { Input } from "./input";
 
 export function SubscribeForm() {
-  const [state, action, pending] = useActionState(subscribe, { email: "" });
+  const { isPending, isSuccess, isError, execute } = useServerAction(
+    subscribeAction,
+    {
+      async onSuccess({ data }) {
+        await storage.setItem("email", data.email);
+      },
+    },
+  );
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+
+    execute({ email });
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 font-medium text-gray-800 text-sm">
+        <EmailLoveIcon className="size-6 text-gray-400" />
+        Welcome! Sending you an email...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-3 font-medium text-gray-800 text-sm">
+        <div className="mr-1.5 size-3 rounded-full bg-rose-500" />
+        Something wen't wrong.
+      </div>
+    );
+  }
 
   return (
-    <form action={action}>
+    <form onSubmit={handleSubmit}>
       <div className="flex gap-2">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-lg border border-gray-900/10 bg-white px-3 py-2 shadow-gray-800/5 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm dark:border-gray-700 dark:bg-gray-700/15 dark:text-gray-200 dark:placeholder:text-gray-500"
-        />
-        <Button type="submit" className="flex-none" disabled={pending}>
-          {pending && (
+        <Input name="email" type="email" placeholder="Email address" />
+        <Button type="submit" className="flex-none" disabled={isPending}>
+          {isPending && (
             <LoadingIcon className="-ml-0.5 mr-0.5 size-4 text-white" />
           )}
           Join

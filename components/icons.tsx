@@ -17,12 +17,48 @@ export function LoadingIcon({
         cy="12"
         r="10"
         stroke="currentColor"
-        stroke-width="4"
+        strokeWidth="4"
       />
       <path
         className="opacity-75"
         fill="currentColor"
         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      />
+    </svg>
+  );
+}
+
+export function EmailLoveIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M14.0574 5.70686C12.8599 5.11217 12 5.98881 12 5.98881C12 5.98881 11.1401 5.11217 9.94264 5.70686C8.49222 6.42714 8.38806 9.2478 12 10.5C15.612 9.2478 15.5078 6.42714 14.0574 5.70686Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 12V4C5 2.89543 5.89543 2 7 2H17C18.1046 2 19 2.89543 19 4V12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M19 7L21.7071 9.70711C21.8946 9.89464 22 10.149 22 10.4142V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V10.4142C2 10.149 2.10536 9.89464 2.29289 9.70711L5 7"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 10L12.8944 14.5528C12.3314 14.8343 11.6686 14.8343 11.1056 14.5528L2 10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
       />
     </svg>
   );

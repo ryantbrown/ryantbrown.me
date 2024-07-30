@@ -11,19 +11,27 @@
     "latest": "bun x npm-check-updates -ui"
   },
   "dependencies": {
+    "@bentonow/bento-nextjs-sdk": "^0.0.1-rc2",
+    "@bentonow/bento-node-sdk": "^0.2.1",
     "@mapbox/rehype-prism": "^0.9.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.5",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@t3-oss/env-nextjs": "^0.11.0",
     "@tailwindcss/typography": "^0.5.13",
     "fast-glob": "^3.3.2",
+    "jiti": "^1.21.6",
     "next": "15.0.0-rc.0",
     "next-themes": "^0.3.0",
     "react": "19.0.0-rc-f994737d14-20240522",
     "react-dom": "19.0.0-rc-f994737d14-20240522",
     "remark-gfm": "^4.0.0",
-    "tailwind-variants": "^0.2.1"
+    "tailwind-variants": "^0.2.1",
+    "unstorage": "^1.10.2",
+    "zod": "^3.23.8",
+    "zsa": "^0.5.1",
+    "zsa-react": "^0.2.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",

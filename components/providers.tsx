@@ -2,6 +2,7 @@
 
 import { ThemeProvider, useTheme } from "next-themes";
 import { useEffect } from "react";
+import { Analytics } from "./analytics";
 
 /**
  * Providers component for the application.
@@ -9,6 +10,7 @@ import { useEffect } from "react";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
+      <Analytics />
       <ThemeWatcher />
       {children}
     </ThemeProvider>
