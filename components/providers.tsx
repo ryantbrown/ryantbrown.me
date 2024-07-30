@@ -3,17 +3,23 @@
 import { env } from "@/env";
 import { BentoAnalytics } from "@bentonow/bento-nextjs-sdk/analytics";
 import { ThemeProvider, useTheme } from "next-themes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Providers component for the application.
  */
 export function Providers({ children }: { children: React.ReactNode }) {
+  const [email, setEmail] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setEmail(localStorage.getItem("rtb:email") ?? undefined);
+  }, []);
+
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
       <BentoAnalytics
         siteUuid={env.NEXT_PUBLIC_BENTO_SITE_ID}
-        userEmail={localStorage.getItem("rtb:email") ?? undefined}
+        userEmail={email}
       />
       <ThemeWatcher />
       {children}
