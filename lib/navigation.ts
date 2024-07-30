@@ -12,11 +12,6 @@ export const navigation = [
     target: "_self",
   },
   {
-    name: "Newsletter",
-    href: "/newsletter",
-    target: "_self",
-  },
-  {
     name: "Community",
     href: discordUrl,
     target: "_blank",

@@ -3,6 +3,8 @@ import { PageLayout } from "@/components/layout";
 import { getArticles } from "@/lib/articles";
 import type { Metadata } from "next";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "Articles",
   description:
