@@ -5,7 +5,7 @@ let storage: ReturnType<typeof createStorage> | undefined;
 
 if (typeof window !== "undefined") {
   storage = createStorage({
-    driver: localStorageDriver({ base: "rtb:" }),
+    driver: localStorageDriver({ base: "rtb" }),
   });
 }
 

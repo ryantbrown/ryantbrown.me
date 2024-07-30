@@ -1,8 +1,9 @@
 "use client";
 
+import { env } from "@/env";
+import { BentoAnalytics } from "@bentonow/bento-nextjs-sdk/analytics";
 import { ThemeProvider, useTheme } from "next-themes";
 import { useEffect } from "react";
-import { Analytics } from "./analytics";
 
 /**
  * Providers component for the application.
@@ -10,7 +11,10 @@ import { Analytics } from "./analytics";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
-      <Analytics />
+      <BentoAnalytics
+        siteUuid={env.NEXT_PUBLIC_BENTO_SITE_ID}
+        userEmail={undefined}
+      />
       <ThemeWatcher />
       {children}
     </ThemeProvider>
