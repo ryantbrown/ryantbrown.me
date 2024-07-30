@@ -13,7 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider attribute="class" disableTransitionOnChange>
       <BentoAnalytics
         siteUuid={env.NEXT_PUBLIC_BENTO_SITE_ID}
-        userEmail={undefined}
+        userEmail={localStorage.getItem("rtb:email") ?? undefined}
       />
       <ThemeWatcher />
       {children}
