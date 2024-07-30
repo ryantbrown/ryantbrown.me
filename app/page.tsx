@@ -1,8 +1,6 @@
 import { Container } from "@/components/container";
 import { SubscribeForm } from "@/components/subscribe";
 
-export const runtime = "edge";
-
 export default function Page() {
   return (
     <Container className="mt-36 lg:mt-40">
