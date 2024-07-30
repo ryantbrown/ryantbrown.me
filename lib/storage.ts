@@ -1,6 +1,12 @@
 import { createStorage } from "unstorage";
 import localStorageDriver from "unstorage/drivers/localstorage";
 
-export const storage = createStorage({
-  driver: localStorageDriver({ base: "rtb:" }),
-});
+let storage: ReturnType<typeof createStorage> | undefined;
+
+if (typeof window !== "undefined") {
+  storage = createStorage({
+    driver: localStorageDriver({ base: "rtb:" }),
+  });
+}
+
+export { storage };

@@ -13,7 +13,7 @@ export function SubscribeForm() {
     subscribeAction,
     {
       async onSuccess({ data }) {
-        await storage.setItem("email", data.email);
+        await storage?.setItem("email", data.email);
       },
     },
   );

@@ -3,7 +3,7 @@ import { storage } from "@/lib/storage";
 import { BentoAnalytics } from "@bentonow/bento-nextjs-sdk/analytics";
 
 export async function Analytics() {
-  const email = (await storage.getItem("email")) as string | undefined;
+  const email = (await storage?.getItem("email")) as string | undefined;
 
   return (
     <BentoAnalytics
