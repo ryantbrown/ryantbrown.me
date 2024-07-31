@@ -15,11 +15,11 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(otherTheme)}
-      className="group hidden px-3 py-2 transition duration-150 sm:block"
+      className="group px-3 py-2 transition duration-150"
       aria-label={mounted ? `Set theme to ${otherTheme}` : "Change theme"}
     >
-      <SunIcon className="size-5 fill-gray-100 stroke-gray-700 group-hover:fill-gray-200 dark:hidden" />
-      <MoonIcon className="hidden size-5 fill-gray-900 stroke-gray-300 group-hover:fill-gray-600 dark:block" />
+      <SunIcon className="size-4 fill-gray-100 stroke-gray-700 group-hover:fill-gray-200 sm:size-5 dark:hidden" />
+      <MoonIcon className="hidden size-4 fill-gray-900 stroke-gray-300 group-hover:fill-gray-600 sm:size-5 dark:block" />
     </button>
   );
 }

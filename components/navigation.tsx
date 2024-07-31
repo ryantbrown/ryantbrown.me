@@ -7,6 +7,7 @@ import {
   Overlay as DialogOverlay,
   Portal as DialogPortal,
   Root as DialogRoot,
+  DialogTitle,
   Trigger as DialogTrigger,
 } from "@radix-ui/react-dialog";
 import Link from "next/link";
@@ -53,6 +54,9 @@ export function MobileNavigation(props: ComponentPropsWithoutRef<"div">) {
         <DialogPortal>
           <DialogOverlay className="fixed inset-0 z-50 bg-gray-800/40 backdrop-blur-sm dark:bg-black/80" />
           <DialogContent className="fixed inset-x-4 top-8 z-50 origin-top rounded-2xl bg-white p-8 ring-1 ring-gray-900/5 dark:bg-gray-900 dark:ring-gray-800">
+            <DialogTitle className="hidden" aria-hidden>
+              Menu
+            </DialogTitle>
             <nav>
               <ul className="text-base">
                 {navigation.map(({ href, name, target }) => (

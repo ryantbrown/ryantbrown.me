@@ -1,9 +1,9 @@
-import { Container } from "@/components/container";
+import { ContentContainer } from "@/components/container";
 import { SubscribeForm } from "@/components/subscribe";
 
 export default function Page() {
   return (
-    <Container className="mt-36 lg:mt-40">
+    <ContentContainer className="mt-32 md:mt-48">
       <div className="max-w-xl">
         <h1 className="text-balance font-bold text-[2.25rem] leading-[2.5rem] tracking-tight sm:text-[3.25rem] sm:leading-[3.25rem]">
           I help developers become superhuman{" "}
@@ -13,18 +13,11 @@ export default function Page() {
         </h1>
         <div className="mt-4 text-gray-600 text-sm/6 sm:text-base/7 dark:text-gray-400">
           <p className="text-balance">
-            During my 15-year career as a software engineer, agency owner and
-            co-founder (CTO) of a $1B startup, I've discovered what matters most
-            &mdash; the product. If you're a{" "}
-            <span className="text-gray-400 italic dark:text-gray-600">
-              (motivated)
-            </span>{" "}
-            developer in {new Date().getFullYear()}, you have everything you
-            need to build amazing products at your fingertips.{" "}
-            <span className="font-medium text-gray-950 dark:text-gray-50">
-              Start that journey
-            </span>
-            .
+            During my decades-long career as a software engineer, CTO, and
+            co-founder of a $1B startup, I've discovered what matters most
+            &mdash; the product. If you're a motivated developer in{" "}
+            {new Date().getFullYear()}, you have everything needed to build a
+            successful software company at your fingertips. Start that journey.
           </p>
         </div>
 
@@ -32,6 +25,6 @@ export default function Page() {
           <SubscribeForm />
         </div>
       </div>
-    </Container>
+    </ContentContainer>
   );
 }

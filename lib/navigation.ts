@@ -2,8 +2,13 @@ import { discordUrl } from "./socials";
 
 export const navigation = [
   {
-    name: "About",
+    name: "Home",
     href: "/",
+    target: "_self",
+  },
+  {
+    name: "About",
+    href: "/about",
     target: "_self",
   },
   {

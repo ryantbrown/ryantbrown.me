@@ -1,9 +1,8 @@
 import { Button } from "../components/button";
-import { Container } from "../components/container";
 
 export default function NotFound() {
   return (
-    <Container className="flex h-full items-center pt-16 sm:pt-32">
+    <div className="mx-auto size-full max-w-6xl pt-16 sm:pt-32">
       <div className="flex flex-col items-center">
         <p className="font-semibold text-base text-gray-400 dark:text-gray-500">
           404
@@ -18,6 +17,6 @@ export default function NotFound() {
           Go back home
         </Button>
       </div>
-    </Container>
+    </div>
   );
 }

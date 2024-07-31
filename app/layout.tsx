@@ -1,3 +1,4 @@
+import { PageContainer } from "@/components/container";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
@@ -20,17 +21,16 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-gray-50 dark:bg-gray-900">
+      <body className="flex h-full bg-gray-50 dark:bg-gray-950">
         <Providers>
-          <div className="fixed inset-0 flex justify-center px-2 md:px-6 lg:px-8">
-            <div className="flex w-full max-w-7xl lg:px-8">
-              <div className="w-full bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-gray-300/20" />
-            </div>
-          </div>
-          <div className="relative flex w-full flex-col">
-            <Header />
-            <main className="flex-auto">{children}</main>
-            <Footer />
+          <div className="mx-auto size-full max-w-6xl">
+            <PageContainer>
+              <Header />
+              <main className="relative flex-auto border-gray-950/5 border-b pb-8 md:pb-16 dark:border-white/5">
+                {children}
+              </main>
+              <Footer />
+            </PageContainer>
           </div>
         </Providers>
       </body>

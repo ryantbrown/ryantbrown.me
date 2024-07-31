@@ -2,11 +2,11 @@ import { ArticleLayout } from "@/components/layout";
 
 
 export const article = {
-  author: 'Ryan Brown',
-  date: '2024-07-22',
-  title: 'Why don\'t more developers build product companies?',
+  author: "Ryan Brown",
+  date: "2024-07-22",
+  title: "Why don't more software engineers start software companies?",
   description:
-    'When we released the first version of cosmOS last year, it was written in Go. Go is a wonderful programming language, but it’s been a while since I’ve seen an article on the front page of Hacker News about rewriting some important tool in Go and I see articles on there about rewriting things in Rust every single week.',
+    "Most developers work on software products. Whether building user-facing applications, creating internal tools, or managing infrastructure, almost everything we do is related to supporting one or more product lines.",
 }
 
 export const metadata = {
@@ -16,93 +16,51 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-When we released the first version of cosmOS last year, it was written in Go. Go is a wonderful programming language with a lot of benefits, but it’s been a while since I’ve seen an article on the front page of Hacker News about rewriting some important tool in Go and I see articles on there about rewriting things in Rust every single week.
 
-```tsx
-import { ReactNode } from "react";
+Most developers work on software products. Whether directly building user-facing applications, creating internal tools, or managing infrastructure, almost everything we do is related to supporting one or more product lines. 
 
-export default (props: { children: ReactNode }) => {
-  return <div>{props.children}</div>;
-}
-```
+How detailed a given product strategy is, and how close developers are to that strategy, is a function of team size, company culture, and their position. The best developers, regardless of position, care deeply about product development, product strategy and user needs.
 
-I derive a large amount of my self-worth from whether or not Hacker News is impressed with the work I'm doing, so when I realized this, I cancelled all of our existing projects and started migrating everything to Rust immediately.
+Given this close proximity to Product, a surprisingly small number of developers start their own software companies. Why is this the case? It’s easy to assume the reasons we’ve all heard: fear of failure, risk aversion, lack of time, financial instability, and a [host of others](https://zapier.com/blog/potential-entrepreneurs-report/).
 
-## Sermone fata
+While these reasons may play a role, they don’t tell the full story. There are only two fundamental reasons people don’t do something: they either don’t want to, or they don’t know how. Let’s explore both of these in the context of today’s world.
 
-Lorem markdownum, bracchia in redibam! Terque unda puppi nec, linguae posterior
-in utraque respicere candidus Mimasque formae; quae conantem cervice. Parcite
-variatus, redolentia adeunt. Tyrioque dies, naufraga sua adit partibus celanda
-torquere temptata, erit maneat et ramos, [iam](#) ait dominari
-potitus! Tibi litora matremque fumantia condi radicibus opusque.
+## Don’t Want To
 
-Deus feram verumque, fecit, ira tamen, terras per alienae victum. Mutantur
-levitate quas ubi arcum ripas oculos abest. Adest [commissaque
-victae](#) in gemitus nectareis ire diva
-dotibus ora, et findi huic invenit; fatis? Fractaque dare superinposita
-nimiumque simulatoremque sanguine, at voce aestibus diu! Quid veterum hausit tu
-nil utinam paternos ima, commentaque.
+On the surface, it might seem simple: maybe most developers just don’t want to start their own company. They are content in their current role, enjoy a great work-life balance, and don’t have any desire to commit the significant resources needed in entrepreneurship.
 
-```ts
-export async function resolve<T extends StorageValue>(
-  key: string,
-  fallback: () => Promise<T>,
-  options = { ttl: 60 }
-): Promise<T> {
-  try {
-    const cached = await kv.getItem<T>(key);
+However, this argument doesn’t match the data. Surveys indicate that [80% of developers](https://www.youtube.com/watch?v=-pSf9_MgsZ4&pp=ygUac3RhY2sgb3ZlcmZsb3cgc3VydmV5IDIwMjQ%3D) are [not satisfied in their current role](https://survey.stackoverflow.co/2024/professional-developers#job-industry-and-satisfaction-job-sat), and that [almost everybody wants to be their own boss](https://www.businesswire.com/news/home/20230425005991/en/2023-Incfile-Small-Business-Trends-Survey-Reveals-90-of-Americans-Want-to-Be-Their-Own-Boss).
 
-    if (cached) {
-      return cached;
-    }
+That leads us to what we discussed earlier. Developers don’t want to start a company because they are risk-averse, afraid to fail, and can’t stomach financial instability. While these reasons may be true for some, they are more “don’t know how” than “don’t want to.” After all, [fear is just ignorance in disguise](https://www.azquotes.com/quotes/topics/ignorance-and-fear.html), which brings us to the second, more complex reason.
 
-    const value = await fallback();
+## Don’t Know How
 
-    await kv.setItem(key, value, options);
+The argument that developers don’t start companies because they don’t know how is much more nuanced. Given the overwhelming perception of starting a company, the challenges seem endless.
 
-    return value;
-  } catch (e) {
-    console.error(e);
-    
-    return await fallback();
-  }
-}
-```
+You can’t think of an idea. You have an idea but you’re convinced it’s not big enough. You can’t make the finances work. The finances work but you don’t have enough time.
 
-Aere repetiti cognataque natus. Habebat vela solutis saepe munus nondum adhuc
-oscula nomina pignora corpus deserat.
+You have the time but you’re a frontend engineer who’s never deployed an application; an API engineer who’s never touched a user interface. Maybe you’re a brilliant full-stack engineer with a great design sense but you don’t know anything about sales and marketing. Maybe you can build the product in a weekend but won’t know what to do on Monday.
 
-## Lethaei Pindumve me quae dinumerat Pavor
+As endless as the reasons are, they are all different forms of “don’t know how”. The leap from working on a product as part of a team to starting, building, launching, growing and sustaining your own company involves a tremendous amount of work that is simply too overwhelming for one person, or even a small team, to take on. Or is it?
 
-Idem se saxa fata pollentibus geminos; quos pedibus. Est urnis Herses omnes nec
-divite: et ille illa furit sim verbis Cyllenius.
+## Complexity Fallacy
 
-1. Captus inpleverunt collo
-2. Nec nam placebant
-3. Siquos vulgus
-4. Dictis carissime fugae
-5. A tacitos nulla viginti
+The perceived complexity of building a software business is often overestimated. Starting a company is simply not as hard as it used to be. This is truer today than yesterday and it will be even truer tomorrow.
 
-Ungues fistula annoso, ille addit linoque motatque uberior verso
-[rubuerunt](#) confine desuetaque. _Sanguine_ anteit
-emerguntque expugnacior est pennas iniqui ecce **haeret** genus: peiora imagine
-fossas Cephisos formosa! Refugitque amata [refelli](#)
-supplex. Summa brevis vetuere tenebas, hostes vetantis, suppressit, arreptum
-regna. Postquam conpescit iuvenis habet corpus, et erratica, perdere, tot mota
-ars talis.
+There will always be challenges and learning curves, but most are easily managed with the right mix of process and technology. In fact, modern technologies, especially A.I., have largely eroded the normal barriers to entry. Nearly all aspects of running a business, from incorporation to customer support, can effectively be streamlined, or entirely automated, with modern tools and services.
 
-```c
-digital.webcam_dual_frequency = webmasterMms;
-if (5 + language_standalone_google) {
-    cc_inbox_layout *= file_character;
-    task += p;
-    lockUnicode += enterprise_monochrome(tokenFunctionPersonal, keyVirtual,
-            adf);
-}
-windows_binary_esports(87734, array(restoreRomTopology, adRaw(407314),
-        dongleBashThumbnail), interpreter);
-```
+## Idea Detour
 
-Sit volat naturam; motu Cancri. Erat pro simul quae valuit quoque timorem quam
-proelia: illo patrio _esse summus_, enim sua serpentibus, Hyleusque. Est coniuge
-recuso; refert Coroniden ignotos manat, adfectu.
+When I talk to developers, one thing that tends to stop them in their tracks is the idea. For some reason, they believe their idea must be a groundbreaking, never-before-seen innovation that will revolutionize an entire industry, maybe even the world. Or, they think all the good ideas are gone, never to return, while others are convinced their idea is so good it can’t be discussed without an NDA in place.
+
+The reality is much more straightforward: ideas are cheap and widely available; execution is everything. Pick something you think you can do in a market that already exists, launch quickly and gather feedback. Real-world data is far more valuable than waiting for inspiration to strike.
+
+## The Non-Negotiable
+
+Ironically, the one thing you must do in order to start a business is the one thing you never hear people use as an excuse — hard work. People are willing to work hard and developers certainly do, they spend years perfecting their craft, consistently solve hard problems and are always learning new things.
+
+## Conclusion
+
+The modern developer has, at their fingertips, everything needed to build a successful software company. By acquiring an insanely valuable skillset, one that can be leveraged in nearly all aspects of running a company, they have already done the hard part. 
+
+The future of entrepreneurship is about merging the right skills with the right tools to let technology do the work for you, developers are better positioned than almost anybody else to do just that.

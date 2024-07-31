@@ -1,7 +1,7 @@
 import type { Article } from "@/lib/articles";
 import { formatDate } from "@/lib/date";
 import type { ReactNode } from "react";
-import { Container } from "./container";
+import { ContentContainer } from "./container";
 
 export function PageLayout({
   title,
@@ -13,8 +13,8 @@ export function PageLayout({
   children?: ReactNode;
 }) {
   return (
-    <Container className="mt-16 sm:mt-32">
-      <header className="max-w-2xl">
+    <ContentContainer className="mt-20 md:mt-32">
+      <div className="max-w-2xl">
         <h1 className="text-balance font-bold text-4xl text-gray-800 tracking-tight sm:text-5xl dark:text-gray-100">
           {title}
         </h1>
@@ -23,9 +23,9 @@ export function PageLayout({
             {description}
           </p>
         )}
-      </header>
+      </div>
       {children && <div className="mt-16 sm:mt-20">{children}</div>}
-    </Container>
+    </ContentContainer>
   );
 }
 
@@ -37,28 +37,26 @@ export function ArticleLayout({
   children: ReactNode;
 }) {
   return (
-    <Container className="mt-16 lg:mt-32">
-      <div className="xl:relative">
-        <div className="mx-auto max-w-2xl">
-          <article>
-            <header className="flex flex-col">
-              <h1 className="mt-6 font-bold text-4xl text-gray-800 tracking-tight sm:text-5xl dark:text-gray-100">
-                {article.title}
-              </h1>
-              <time
-                dateTime={article.date}
-                className="order-first flex items-center text-base text-gray-400 dark:text-gray-500"
-              >
-                <span className="h-4 w-0.5 rounded-full bg-gray-200 dark:bg-gray-500" />
-                <span className="ml-3">{formatDate(article.date)}</span>
-              </time>
-            </header>
-            <div className="prose dark:prose-invert mt-8" data-mdx-content>
-              {children}
-            </div>
-          </article>
-        </div>
+    <ContentContainer className="mt-12 md:mt-16">
+      <div className="mx-auto max-w-2xl">
+        <article>
+          <header className="flex flex-col">
+            <h1 className="mt-6 font-bold text-4xl text-gray-800 tracking-tight sm:text-5xl dark:text-gray-100">
+              {article.title}
+            </h1>
+            <time
+              dateTime={article.date}
+              className="order-first flex items-center text-base text-gray-400 dark:text-gray-500"
+            >
+              <span className="h-4 w-0.5 rounded-full bg-gray-200 dark:bg-gray-500" />
+              <span className="ml-3">{formatDate(article.date)}</span>
+            </time>
+          </header>
+          <div className="prose dark:prose-invert mt-8" data-mdx-content>
+            {children}
+          </div>
+        </article>
       </div>
-    </Container>
+    </ContentContainer>
   );
 }
