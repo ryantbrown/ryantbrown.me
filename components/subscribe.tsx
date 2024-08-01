@@ -4,11 +4,13 @@ import { subscribeAction } from "@/actions";
 import { Button } from "@/components/button";
 import { EmailLoveIcon, LoadingIcon } from "@/components/icons";
 import { storage } from "@/lib/storage";
-import type { FormEvent } from "react";
+import { type FormEvent, useRef } from "react";
 import { useServerAction } from "zsa-react";
 import { Input } from "./input";
 
 export function SubscribeForm() {
+  const ref = useRef<HTMLInputElement>(null);
+
   const { isPending, isSuccess, isError, execute } = useServerAction(
     subscribeAction,
     {
@@ -23,6 +25,11 @@ export function SubscribeForm() {
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
+
+    if (!email) {
+      ref.current?.focus();
+      return;
+    }
 
     execute({ email });
   }
@@ -48,7 +55,12 @@ export function SubscribeForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex gap-2">
-        <Input name="email" type="email" placeholder="Email address" />
+        <Input
+          ref={ref}
+          name="email"
+          type="email"
+          placeholder="Email address"
+        />
         <Button type="submit" className="flex-none" disabled={isPending}>
           {isPending && (
             <LoadingIcon className="-ml-0.5 mr-0.5 size-4 text-white" />

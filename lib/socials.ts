@@ -11,6 +11,7 @@ import {
  * The Discord server URL.
  */
 export const discordUrl = "https://discord.gg/HryPVgTa";
+export const linkedinUrl = "https://www.linkedin.com/in/ryan-t-brown/";
 
 /**
  * The social links.
@@ -23,7 +24,7 @@ export const socials = [
     icon: XIcon,
   },
   {
-    url: "https://www.linkedin.com/in/ryan-t-brown/",
+    url: linkedinUrl,
     name: "LinkedIn",
     label: "Follow me on LinkedIn",
     icon: LinkedInIcon,

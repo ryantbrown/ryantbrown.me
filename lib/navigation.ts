@@ -6,11 +6,11 @@ export const navigation = [
     href: "/",
     target: "_self",
   },
-  {
-    name: "About",
-    href: "/about",
-    target: "_self",
-  },
+  // {
+  //   name: "About",
+  //   href: "/about",
+  //   target: "_self",
+  // },
   {
     name: "Articles",
     href: "/articles",

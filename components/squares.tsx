@@ -50,10 +50,12 @@ function Square({
     <div
       style={style}
       className={cn(
-        "absolute border-gray-950/5 border-t border-l transition-all duration-100 ease-out hover:bg-lime-50",
-        color === "lime" && "bg-lime-50",
-        color === "gray" && "bg-gray-50",
-        color === "white" && "bg-white",
+        "absolute transition-all duration-1000 ease-out",
+        "border-gray-950/5 border-t border-l dark:border-white/5",
+        "hover:bg-lime-50 dark:hover:bg-lime-800",
+        color === "lime" && "bg-lime-50 dark:bg-lime-800",
+        color === "gray" && "bg-gray-50 dark:bg-gray-800",
+        color === "white" && "bg-white dark:bg-gray-900",
         className,
       )}
     />
