@@ -20,6 +20,24 @@ export function PageContainer({
   );
 }
 
+export function MainContainer({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<"main">) {
+  return (
+    <main
+      className={cn(
+        "relative flex-auto border-gray-950/5 border-b pb-8 md:pb-16 dark:border-white/5",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </main>
+  );
+}
+
 export function ContentContainer({
   className,
   children,

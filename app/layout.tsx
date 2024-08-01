@@ -21,14 +21,12 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-gray-50 dark:bg-gray-950">
+      <body className="h-full bg-gray-50 dark:bg-gray-950">
         <Providers>
           <div className="mx-auto size-full max-w-6xl">
             <PageContainer>
               <Header />
-              <main className="relative flex-auto border-gray-950/5 border-b pb-8 md:pb-16 dark:border-white/5">
-                {children}
-              </main>
+              {children}
               <Footer />
             </PageContainer>
           </div>

@@ -4,7 +4,7 @@ import { DesktopNavigation, MobileNavigation } from "./navigation";
 
 export function Header() {
   return (
-    <header className="pointer-events-none">
+    <header className="pointer-events-none relative z-50">
       <ContentContainer>
         <div className="flex items-center gap-4 py-4 md:py-6">
           <Avatar />
