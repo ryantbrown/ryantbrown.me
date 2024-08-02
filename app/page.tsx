@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <MainContainer className="flex min-h-[calc(100vh-10rem)] items-center">
+    <MainContainer className="flex min-h-[800px] items-center">
       <div className="absolute right-0 bottom-0 h-full w-[40%]">
         <GridSquares />
       </div>
