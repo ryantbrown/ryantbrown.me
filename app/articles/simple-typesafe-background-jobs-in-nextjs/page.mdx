@@ -1,0 +1,259 @@
+import { ArticleLayout } from "@/components/layout";
+import { Callout, CalloutTitle, CalloutBody } from "@/components/callout";
+
+export const article = {
+  author: "Ryan Brown",
+  date: "2024-08-03",
+  title: "Simple, reliable, type-safe background jobs in Next.js",
+  description:
+    "Learn how to reliably run background tasks in your Next.js applications using Upstash Qstash and a little bit of TypeScript.",
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+[View the code on GitHub](https://github.com/getproductstack/jobs)
+## Asynchronous Processing
+
+Asynchronous processing is one of the most important concepts in building good products. In my opinion, any task taking longer than a second should be run in the background, and if the status is important, the user should be notified once it completes.
+
+Sending an email is the most common example, but when building modern software products, there are many others:
+
+- Importing data
+- Generating vector embeddings
+- Updating search indexes
+- Creating activity records
+- Generating audit logs
+- Sending user notifications
+- Processing payments
+- Resizing images
+
+<Callout title="Queues, Workers, Jobs, Tasks">
+The terminology can be confusing, by generally, "queues", "workers", "jobs", "tasks" and “background _” all refer to the same thing: async processing. There are differences in how the jobs are processed but that's not mentioned in this article.
+</Callout>
+
+## The Problem with Serverless
+
+In order to process jobs in the background, you need a system to keep track of delivery, retries, failures, concurrency, etc. This can be a long-running Node process, a third-party service or infrastructure primitives.
+
+There are no long running processes on Vercel, and the whole point of  Vercel is that I don’t want to manage anything. If I am managing infrastructure, I use AWS with [SST](https://sst.dev) — at that point using [SQS](https://ion.sst.dev/docs/component/aws/queue/) and [SNS](https://ion.sst.dev/docs/component/aws/sns-topic) to trigger Lambda functions is very strait forward.
+
+## Upstash to the Rescue
+
+Believe it or not, I have spent way too much time trying to solve background jobs on Vercel. I have tried every service under the sun and for me, nothing beats [Upstash QStash](https://upstash.com/docs/qstash).
+
+### How QStash Works
+
+The idea behind QStash (and other, similar services) is deceptively simple. You send them an HTTP request and they send you one back, that’s it. 
+
+Here’s an example:
+
+```tsx
+import { Client } from "@upstash/qstash";
+
+const qstash = new Client({ token: "QSTASH_TOKEN" });
+
+await qstash.publishJSON({
+  url: "https://myapp.com/api/send-email",
+  body: {
+    users: [
+	    "someone@example.com", 
+	    "someone.else@example.com"
+    ]
+  }
+});
+```
+
+This code tells QStash to send a request your route handler with the payload you provided. You can then process that request:
+
+```tsx
+// app/api/send-email/route.ts
+
+import { sendEmail } from "your-email-library";
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const users: string[] = body.users;
+
+  for (const user of users) {
+    await sendEmail(user);
+  }
+
+  return new Response("Job started");
+}
+```
+
+<Callout variant="warning" title="Reliability & Control">
+Upstash will guarantee delivery while giving you control over retries, failed requests, concurrency, delays, batching and replay, all without managing anything — it’s also very, [very cost-effective](https://upstash.com/pricing/qstash).
+</Callout>
+
+## Better Developer Experience
+
+As good as the QStash infrastructure is, the developer experience of writing and managing jobs is less than ideal. It’s basically just a wrapper around fetch with no type-safety, no ability to treat jobs as first-class objects, and completely separate route handlers for each job.
+
+This can be greatly improved by doing the following:
+
+1. Single route handler (single endpoint) for all jobs
+2. Factory for creating jobs as first-class objects
+3. Jobs have a `dispatch` method.
+4. Job keys and payloads are type-safe with good autocomplete.
+
+Here is an example of my ideal API for creating and dispatching jobs.
+
+```tsx
+// create a job and export it
+export const emailJob = createJob('email-job', async (users: string[]) => {
+	for (const user of users) {
+	  await sendEmail(user);
+	}
+});
+
+// import the job and dispatch it
+await emailJob.dispatch([
+  "someone@example.com", 
+  "someone.else@example.com"
+]);
+```
+
+## Creating the Ideal API
+
+In order to allow for this API, there are two things we need:
+
+1. Factory to create jobs that can be dispatched
+2. Route handler that processes the QStash requests
+
+### Starting with Types
+
+I find that starting with types is a good way to flush out an API. Our `Job` has a unique ID and a handler, which is just a function that takes a single argument (the request body).
+
+```tsx
+/**
+ * Jobs are a first-class object.
+ */ 
+type Job = {
+  /**
+   * The job key, used to identify the job.
+   */
+  key: string;
+
+  /**
+   * The job handler, called when the job is triggered.
+   */
+  handler: JobHandler;
+}
+
+/**
+ * A handler is any function that takes a single argument.
+ */
+type JobHandler<T = any> = (payload: T) => Promise<void>
+
+/**
+ * A map of job keys to their handlers.
+ * Will be used to retrieve handlers by key.
+ */
+type JobMap = Map<string, JobHandler>;
+```
+
+### Creating Jobs
+
+Before we can process jobs, we need to be able to create them.
+
+```tsx
+import type { PublishRequest } from "@upstash/qstash";
+
+const endpoint = "https://app.com/api/jobs";
+
+function createJob<T>(key: string, handler: JobHandler<T>) {
+	return {
+		key,
+		handler,
+		dispatch: async (payload: T, options?: PublishRequest) => {
+			await qstash.publishJSON({
+	      ...options,
+	      body: payload,
+	      method: "POST",
+	      url: `${this.endpoint}?job=${key}`,
+	    });
+	  }
+	}
+}
+```
+
+A couple of notes:
+
+1. We return the `key` and `handler` directly to satisfy the `Job` type.
+2. The dispatch method takes the same options as `publishJSON` but overrides the body, method and url.
+3. We append a `job` query parameter to the url so that we can identify the job that was dispatched in our handler.
+
+### Processing Jobs
+
+Now that we can create our jobs we need to process them. Let’s create the route handler that QStash will invoke when we dispatch a job.
+
+```tsx
+import type { Receiver } from "@upstash/qstash";
+import type { Job, JobHandler, JobMap } from "./types";
+
+/**
+ * An array of jobs we have defined.
+ */
+const jobs: Job[] = [];
+
+/**
+ * Register jobs, this is just a simple 
+ * way to find a job by key.
+ */
+const registry: JobMap = new Map();
+
+for (const job of jobs) {
+  registry.set(job.key, job.handler);
+}
+
+/**
+ * Next.js route handler.
+ */
+export function POST(request: Request) {
+  /**
+   * Parse the request.
+   */
+  const url = new URL(request.url);
+  const key = url.searchParams.get("job");
+  const signature = request.headers.get("Upstash-Signature");
+	
+	/**
+   * Decode the request body.
+   */
+  const body = await request.json();
+
+  /**
+   * Verify the request.
+   */
+  const valid = await receiver.verify({
+    signature,
+    body: JSON.stringify(body),
+  });
+
+  if (!valid) {
+    return new Response("Invalid signature", { status: 400 });
+  }
+  
+  /**
+   * Execute the handler.
+   */
+  const handler = registry.get(key);
+  if (handler) await handler(body.payload);
+ 
+  /**
+   * Return a 200 response.
+   */
+  return new Response();
+} 
+
+```
+
+### That’s (Basically) It
+
+With these two pieces of code, plus QStash, you get everything you need to reliably run tasks in the background of your Next.js applications and the developer experience to make creating and dispatching jobs as simple as possible.

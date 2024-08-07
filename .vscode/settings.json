@@ -8,6 +8,11 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
+  "[mdx]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never"
+    }
+  },
   "tailwindCSS.experimental.configFile": "./tailwind.config.ts",
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]

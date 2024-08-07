@@ -8,8 +8,10 @@ pre[class*='language-'] {
 
 .token.class-name,
 .token.selector,
+.token.constant,
 .token.selector .class,
 .token.selector.class,
+.token.maybe-class-name,
 .token.function {
   color: theme('colors.code.peach');
 }
@@ -17,10 +19,9 @@ pre[class*='language-'] {
 .token.pseudo-class,
 .token.important,
 .token.attr-equals,
-
 .token.keyword.module,
 .token.unit {
-  color: theme('colors.code.purple');
+  color: theme('colors.code.darkBlue');
 }
 
 
@@ -30,7 +31,8 @@ pre[class*='language-'] {
 }
 .token.tag,
 .token.attr-name,
-.token.maybe-class-name,
+.token.property-access,
+.token.builtin,
 .token.generic {
   color: theme('colors.code.lightBlue');
 }
