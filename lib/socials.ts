@@ -10,7 +10,7 @@ import {
 /**
  * The Discord server URL.
  */
-export const discordUrl = "https://discord.gg/HryPVgTa";
+export const discordUrl = "https://discord.gg/URXstudD";
 export const linkedinUrl = "https://www.linkedin.com/in/ryan-t-brown/";
 
 /**
