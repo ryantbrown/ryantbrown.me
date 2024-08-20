@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <PageLayout
-      title="I write about code, design, and building products."
+      title="Code. Design. Product."
       description="My goal is to help developers become successful founders by building amazing products. I share advice, interviews, code and anything else that might be helpful."
     >
       <div className="md:border-gray-100 md:border-l md:pl-6 md:dark:border-gray-700/40">

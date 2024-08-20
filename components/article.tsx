@@ -30,7 +30,7 @@ export function ArticleRow({ article }: { article: Article }) {
         </p>
         <div
           aria-hidden="true"
-          className="relative z-10 mt-4 flex items-center font-medium text-sm text-teal-500"
+          className="relative z-10 mt-4 flex items-center font-medium text-lime-500 text-sm"
         >
           Read
         </div>
