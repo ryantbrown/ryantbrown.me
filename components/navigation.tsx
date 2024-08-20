@@ -11,8 +11,8 @@ import {
   Trigger as DialogTrigger,
 } from "@radix-ui/react-dialog";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import type { ComponentPropsWithoutRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, type ComponentPropsWithoutRef } from "react";
 
 export function DesktopNavigation(props: ComponentPropsWithoutRef<"nav">) {
   const path = usePathname();
@@ -44,10 +44,12 @@ export function DesktopNavigation(props: ComponentPropsWithoutRef<"nav">) {
 
 export function MobileNavigation(props: ComponentPropsWithoutRef<"div">) {
   const path = usePathname();
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   return (
     <div {...props}>
-      <DialogRoot>
+      <DialogRoot open={open} onOpenChange={setOpen}>
         <DialogTrigger className="font-medium text-gray-950 text-sm dark:text-white">
           Menu
         </DialogTrigger>
@@ -69,7 +71,16 @@ export function MobileNavigation(props: ComponentPropsWithoutRef<"div">) {
                         : "font-normal text-gray-800 dark:text-gray-300",
                     )}
                   >
-                    <Link href={href} target={target} className="block py-2">
+                    <Link
+                      href={href}
+                      target={target}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setOpen(false);
+                        router.push(href);
+                      }}
+                      className="block py-2"
+                    >
                       {name}
                     </Link>
                   </li>
